@@ -1,22 +1,26 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+# Use Microsoft's official build .NET image.
+# https://hub.docker.com/_/microsoft-dotnet-core-sdk/
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
-WORKDIR /src
-COPY ["HelloCloudRun.csproj", ""]
-RUN dotnet restore "./HelloCloudRun.csproj"
-COPY . .
-WORKDIR "/src/."
-RUN dotnet build "HelloCloudRun.csproj" -c Release -o /app/build
+# Install production dependencies.
+# Copy csproj and restore as distinct layers.
+COPY *.csproj ./
+RUN dotnet restore
 
-FROM build AS publish
-RUN dotnet publish "HelloCloudRun.csproj" -c Release -o /app/publish
-
-FROM base AS final
+# Copy local code to the container image.
+COPY . ./
 WORKDIR /app
-COPY --from=publish /app/publish .
+
+# Build a release artifact.
+RUN dotnet publish -c Release -o out
+
+
+# Use Microsoft's official runtime .NET image.
+# https://hub.docker.com/_/microsoft-dotnet-core-aspnet/
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine AS runtime
+WORKDIR /app
+COPY --from=build /app/out ./
+
+# Run the web service on container startup.
 ENTRYPOINT ["dotnet", "HelloCloudRun.dll"]
