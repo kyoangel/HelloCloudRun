@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloCloudRun", "HelloCloudRun.csproj", "{0DD05062-5556-4744-AAAF-0E6B8FC9A34E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0DD05062-5556-4744-AAAF-0E6B8FC9A34E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DD05062-5556-4744-AAAF-0E6B8FC9A34E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DD05062-5556-4744-AAAF-0E6B8FC9A34E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DD05062-5556-4744-AAAF-0E6B8FC9A34E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A1E4134F-4067-4F42-B789-4B8396F69FE3}
+	EndGlobalSection
+EndGlobal
